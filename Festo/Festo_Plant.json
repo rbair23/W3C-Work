@@ -1,0 +1,104 @@
+{
+  "urn": "urn:com:siemens:wot:FestoPlant",
+  "name": "Festo Plant",
+  "description": "Device Model for the Festo Plant @ Siemens",
+  "system": false,
+  "attributes": [
+    {
+      "description": "",
+      "name": "Tank102levelvalue",
+      "type": "NUMBER",
+      "writable": false
+    },
+    {
+      "description": "",
+      "name": "Tank102overflowStatus",
+      "type": "BOOLEAN",
+      "writable": false
+    },
+    {
+      "description": "",
+      "name": "ValveStatus",
+      "type": "BOOLEAN",
+      "writable": false
+    },
+    {
+      "description": "",
+      "name": "Tank101minimumLevelStatus",
+      "type": "BOOLEAN",
+      "writable": false
+    },
+    {
+      "description": "",
+      "name": "Tank101maximumLevelStatus",
+      "type": "BOOLEAN",
+      "writable": false
+    },
+    {
+      "description": "",
+      "name": "PumpStatus",
+      "type": "BOOLEAN",
+      "writable": false
+    },
+    {
+      "description": "",
+      "name": "Tank101overflowStatus",
+      "type": "BOOLEAN",
+      "writable": false
+    },
+    {
+      "alias": "ora_lat",
+      "name": "ora_latitude",
+      "range": "-90.0,90.0",
+      "type": "NUMBER",
+      "writable": false
+    },
+    {
+      "alias": "ora_lon",
+      "name": "ora_longitude",
+      "range": "-180.0,180.0",
+      "type": "NUMBER",
+      "writable": false
+    },
+    {
+      "alias": "ora_alt",
+      "name": "ora_altitude",
+      "type": "NUMBER",
+      "writable": false
+    },
+    {
+      "alias": "ora_accuracy",
+      "name": "ora_uncertainty",
+      "type": "NUMBER",
+      "writable": false
+    },
+    {
+      "name": "ora_zone",
+      "type": "STRING",
+      "writable": false
+    }
+  ],
+  "actions": [
+    {
+      "alias": "",
+      "description": "",
+      "name": "OpenValve"
+    },
+    {
+      "alias": "",
+      "description": "",
+      "name": "CloseValve"
+    },
+    {
+      "alias": "",
+      "description": "",
+      "name": "StartPump"
+    },
+    {
+      "alias": "",
+      "description": "",
+      "name": "StopPump"
+    }
+  ],
+  "formats": []
+}
