@@ -1,0 +1,81 @@
+{
+  "@context": [ "http://w3c.github.io/wot/w3c-wot-td-context.jsonld" ],
+  "@type": [ "Thing" ],
+  "name": "MyLampThing",
+  "interaction": [
+    {
+      "@type": [ "Property" ],
+      "name": "status",
+      "outputData": { "type": "boolean" },
+      "writable": true,
+      "observable": true,
+      "form": [
+        {
+          "rel": "readProperty",
+          "href": "coaps://mylamp.example.com:5683/status",
+          "mediaType": "application/ocf+cbor",
+          "coap:methodCode": 1,
+          "coap:options": [
+            {
+              "coap:optionNumber": 2049,
+              "coap:optionValue": "1.1.0"
+            }
+          ]
+        }, {
+          "rel": "writeProperty",
+          "href": "coaps://mylamp.example.com:5683/status",
+          "mediaType": "application/json",
+          "coap:methodCode": 3
+        }, {
+          "rel": "observeProperty",
+          "href": "coaps://mylamp.example.com:5683/status",
+          "mediaType": "application/json",
+          "coap:methodCode": 1,
+          "coap:options": [
+            {
+              "coap:optionNumber": 6,
+              "coap:optionValue": 0
+            }
+          ]
+        }
+      ]
+    }, {
+      "@type": [ "Action" ],
+      "name": "toggle",
+      "form": [
+        {
+          "rel": "invokeAction",
+          "href": "https://mylamp.example.com:443/toggle",
+          "http:methodName": "POST",
+          "http:MessageHeader": [
+            {
+              "http:fieldName": "Pragma",
+              "http:fieldValue": "no-cache"
+            }
+          ]
+        }
+      ]
+    }, {
+      "@type": [ "Event" ],
+      "name": "overheating",
+      "outputData": { "type": "string" },
+      "form": [
+        {
+          "rel": "subscribeEvent",
+          "href": "mqtt://broker.example.com:8883/MyLampThing/events/overheating",
+          "mediaType": "application/json",
+          "mqtt:messageType": 3
+        }
+      ]
+    }
+  ],
+  "link": [
+    {
+      "rel": "contains",
+      "href": "https://mylamp.example.com:443/smart-meter/td"
+    }, {
+      "rel": "locatedAt",
+      "href": "https://myroom.example.com:443/"
+    }
+  ]
+}
