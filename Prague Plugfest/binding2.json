@@ -1,0 +1,185 @@
+        {
+          "@context": [
+            "http://w3c.github.io/wot/w3c-wot-td-context.jsonld",
+            "http://w3c.github.io/wot/w3c-wot-common-context.jsonld",
+        	  {"iot": "http://iotschema.org/"}
+          ],
+          "base": "http://exampl.com/",
+          "@type": [ "Thing", "iot:Light", "iot:Dimmer", "iot:BinarySwitch" ],
+          "name": "Lamp",
+          "interaction": [
+            {
+              "name": "Switch State",
+              "@type": ["Property", "iot:SwitchStatus"],
+              "outputdata":  {
+                "type": "object",
+                "observable": "true",
+                "field": [
+                  {
+                    "name": "switch",
+                    "@type": ["iot:SwitchData"],
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "form": [
+                {
+                  "href": "/example/light/currentswitch",
+                  "mediatype": "application/json",
+                  "rel": "td:readProperty",
+                  "http:methodName": "http:get"
+                },
+                {
+                  "href": "/example/light/currentswitch",
+                  "mediatype": "application/json",
+                  "rel": "td:writeProperty",
+                  "http:methodName": "http:post"
+                },
+                {
+                  "href": "mqtt://example.com/example/light/currentswitch",
+                  "rel": "td:observe",
+                  "mqtt:methodName": "mqtt:subscribe"
+                }
+              ]
+            },
+            {
+              "name": "Current brightness",
+              "@type": ["Property", "iot:CurrentDimmer"],
+              "outputData": {
+                "type": "object",
+                "observable": "true",
+                "field": [
+                  {
+                    "name": "brightness",
+                    "type": "integer",
+                    "@type": ["iot:DimmerData" ],
+                    "min": 0,
+                    "max": 255
+                  }
+                ]
+              },
+              "form": [
+                {
+                  "href": "/example/light/currentdimmer",
+                  "mediatype": "application/json",
+                  "rel": "td:readProperty",
+                  "http:methodName": "http:get"
+                },
+                {
+                  "href": "/example/light/currentdimmer",
+                  "mediatype": "application/json",
+                  "rel": "td:writeProperty",
+                  "http:methodName": "http:post"
+                },
+                {
+                  "href": "mqtt://example.com/example/light/currentdimmer",
+                  "rel": "td:observe",
+                  "mqtt:methodName": "mqtt:subscribe"
+                }
+              ]
+            },
+            {
+              "name": "Transition Time",
+              "@type": ["Property", "iot:TransitionTime"],
+              "outputData": {
+                "type": "object",
+                "field": [
+                  {
+                    "name": "transitiontime",
+                    "type": "integer",
+                    "@type": ["iot:TransitionTimeData" ],
+                    "min": 0,
+                    "max": 255
+                  }
+                ]
+              },
+              "form": [
+                {
+                  "href": "/example/light/transitiontime",
+                  "mediatype": "application/json",
+                  "rel": "td:readProperty",
+                  "http:methodName": "http:get"
+                },
+                {
+                  "href": "/example/light/transitiontime",
+                  "mediatype": "application/json",
+                  "rel": "td:writeProperty",
+                  "http:methodName": "http:post"
+                }
+              ]
+            },
+            {
+              "name": "Switch On",
+              "@type": ["Action", "iot:SwitchOn"],
+              "outputdata":  {
+                "type": "object",
+                "field": [
+                  {
+                    "name": "switch",
+                    "const": true
+                  }
+                ]
+              },
+              "form": [
+                {
+                  "href": "/example/light/currentswitch",
+                  "mediatype": "application/json",
+                  "rel": "td:invokeAction",
+                  "http:methodName": "http:post"
+                }
+              ]
+            },
+            {
+              "name": "Switch Off",
+              "@type": ["Action", "iot:SwitchOff"],
+              "outputdata":  {
+                "type": "object",
+                "field": [
+                  {
+                    "name": "switch",
+                    "const": false
+                  }
+                ]
+              },
+              "form": [
+                {
+                  "href": "/example/light/currentswitch",
+                  "mediatype": "application/json",
+                  "rel": "td:invokeAction",
+                  "http:methodName": "http:post"
+                }
+              ]
+            },
+            {
+              "name": "Set brightness level",
+              "@type": ["Action", "iot:SetDimmer"],
+              "inputData": {
+                "type": "object",
+                "field": [
+                  {
+                    "name": "brightness",
+                    "type": "integer",
+                    "@type": ["iot:DimmerData"],
+                    "min": 0,
+                    "max": 255
+                  },
+                  {
+                    "name": "transitiontime",
+                    "type": "integer",
+                    "@type": ["iot:TransitionTimeData"],
+                    "min": 0,
+                    "max": 65535
+                  }
+                ]
+              },
+              "form": [
+                {
+                  "href": "/example/light/",
+                  "mediatype": "application/json",
+                  "rel": "td:invokeAction",
+                  "http:methodName": "http:post"
+                }
+              ]
+            }
+          ]
+        }

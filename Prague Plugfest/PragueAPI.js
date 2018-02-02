@@ -1,8 +1,8 @@
 /**
- * Source: https://github.com/w3c/wot-scripting-api/issues/82
+ * 
  */
 
- interface WoT {
+interface WoT {
     Observable<ConsumedThing> discover(optional ThingFilter filter);
     Promise<ThingDescription> fetchTD(USVString url);
     ConsumedThing             consume(ThingDescription td); // with fetch split out, we could make it synchrounous
@@ -46,7 +46,7 @@ interface ExposedThing: ConsumedThing {
     Promise<void> register(USVString url); // convenience for Thing Directory
     Promise<void> unregister(USVString url); // convenience for Thing Directory
     Promise<void> emitEvent(DOMString eventName, any payload);
-
+    
     void  addProperty(ThingPropertyInit property);  // throws on error
     void  removeProperty(DOMString name);  // throws on error
     void  addAction(ThingActionInit action);  // throws on error
@@ -59,7 +59,7 @@ typedef DOMString ValueType;  // Linked Data JSON Schema
 
 dictionary ThingPropertyInit {
     DOMString               name;
-    ValueType               type;
+    ValueType               type; 
     any                     initValue;
     boolean?                writable = false;
     boolean?                observable = false;
@@ -71,7 +71,7 @@ dictionary ThingPropertyInit {
 
 dictionary ThingActionInit {
     DOMString               name;
-    ValueType               inputType;
+    ValueType               inputType; 
     ValueType               outputType;
     Function                action;
     sequence<SemanticType>? semanticTypes = [];
