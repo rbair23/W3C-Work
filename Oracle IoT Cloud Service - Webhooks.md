@@ -1,5 +1,10 @@
-# Oracle IoT Cloud service Event Model
+# Event Model of the Oracle IoT Cloud Service
 
+The Oracle IoT Cloud Service provides a robust and field-proven mechanism for sending messages from devices
+and gateways to the Cloud Service and vice versa. All communication is using JSON playloads over HTTP/REST.
+There are different mechanisms for consumed and exposed devices.
+
+## Consumed devices
 The Oracle IoT Cloud service provides an event model (messaging model) with two different message types:
 
 - regular messages
@@ -8,9 +13,17 @@ The Oracle IoT Cloud service provides an event model (messaging model) with two 
 Regular messages are sent by devices on status changes or at regular intervals, whereas alerts are sent to indicate an error condition that must be brought to the attention of a human. 
 The management console and server-side applications of the IoT Cloud Service distinugish between alerts and regular messages in the UI and provide alarming mechanisms.
 Devices must be registered at the IoT Cloud service (which involves the exchange of security information) before a device
-can send messages. The device is an active component and decides by itself when a message or an alert is sent.
+can send messages. The device is an **active component** and decides by itself when a message or an alert is sent.
+The registration mechanism implicitly performs a message subscription. 
 
-Messages are sent to the IoT Cloud Service via a REST API or by using Oracle's open source device client libraries, which are available for multiple platforms. Messages are sent as an array of JSON objects. A type field identifies the type of each message.
+
+Messages are *sent* to the IoT Cloud Service via a REST API or by using Oracle's open source device client libraries, which are available for multiple platforms. Messages are sent as an array of JSON objects. A type field identifies the type of each message.
+
+The message payload can contain a single event or can aggregate multiple messages. Multiple messages in a single payload
+are typically used when the connected device provides gateway functionality, i.e. when it aggregates messages from several connected devices.
+
+The same mechanism is also used to send messages **from the Cloud to the device**, where messages are passed in the
+response payload of a message. 
 
 The REST API endpoint for sending messages is described in more detail at https://docs.oracle.com/en/cloud/paas/iot-cloud/iotrq/op-iot-api-v2-messages-post.html
 
@@ -18,27 +31,31 @@ A higher level of abstraction is provided by the client libraries (https://www.o
 
 ## Exposed devices 
 
-The Oracle IoT Cloud service provides a flexible integration mechanism for integrating with other off-the-shelf enterprise systems. Supported systems include Storage Cloud Service, Business Integration Cloud Service, Big Data Cloud Service, Mobile Cloud Service and others. 
+The Oracle IoT Cloud service also provides a flexible integration mechanism for integrating with other off-the-shelf enterprise systems. Supported systems include Storage Cloud Service, Business Integration Cloud Service, Big Data Cloud Service, Mobile Cloud Service and others. 
 
 An overview of the various integratable cloud services can be seen at:
 https://docs.oracle.com/en/cloud/paas/iot-cloud/iotgs/integrating-external-services.html
 
-The IoT Cloud service also includes a generic mechanism for integrating other cloud services via the WebHook mechanism,
-which will be used by WoT compliant devices.
-This mechanism establishes a client/server connection between the Oracle IoT Cloud Service (Client role) with a (HTTP) server in the target service.
+The IoT Cloud service also provides a generic mechanism for sending events (messages) to other cloud services via the WebHook mechanism, which will be used by WoT compliant devices. This mechanism is called "Enterprise Integrations".
+It establishes a client/server connection between the Oracle IoT Cloud Service (Client role) with a (HTTP) server in the target service.
 An application registeres a HTTP(s) callback and receives device messages via a  POST HTTP request, with the request payload containing the device message data in JSON format.
+
+In a typical use case, an enterprise system is interested in messages from multiple devices, however it is also possible to create an integration at single device level. An integration is associated with an IoT application, which is a collection
+of all those devices, that are used together for a user scenario.
    
 This mechanism is simple and powerful: It permits to select multiple message formats (across different device models) to be transmitted over a single integration.
 
-The message formats, that are to be transmitted are selected when the integration is transferred. The intergration persists , when the communication partner goes down and is resumed, when it is back online.
+The message formats, that are to be transmitted are selected when the integration is transferred. The intergration persists, when the communication partner goes down and is resumed, when it is back online.
 
-In a typical use case, an enterprise system is interested in messages from multiple devices, however it is also possible to create an integration at single device level.
+Integrations are either interactively created in the Management Console UI (https://docs.oracle.com/en/cloud/paas/iot-cloud/iotgs/integrating-enterprise-applications-oracle-iot-cloud-service.html) or programmatically by using the **IoT Application integrations REST Endpoints**, as described at https://docs.oracle.com/en/cloud/paas/iot-cloud/iotrq/api-iot-application-integration.html. The Management Console offers a connectivity test feature to verify the connectivity to 
+a Webhook server.
 
-https://docs.oracle.com/en/cloud/paas/iot-cloud/iotgs/integrating-enterprise-applications-oracle-iot-cloud-service.html
-
+A sample application that exposes a Webhook can be provided on request.
 
 ### Payload examples 
 The payload format is plain JSON, as can be seen in the examples below. It contains message metadata, such as a message id, a client Id and a message source and timestamps and the actual payload format.
+
+The WoT payload format for events has to support event messages in this format.
 
 #### Environment Sensor (KETI):
 
