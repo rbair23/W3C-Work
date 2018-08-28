@@ -47,7 +47,7 @@ This mechanism is simple and powerful: It permits to select multiple message for
 
 The message formats, that are to be transmitted are selected when the integration is transferred. The intergration persists, when the communication partner goes down and is resumed, when it is back online.
 
-Integrations are either interactively created in the Management Console UI (https://docs.oracle.com/en/cloud/paas/iot-cloud/iotgs/integrating-enterprise-applications-oracle-iot-cloud-service.html) or programmatically by using the **IoT Application integrations REST Endpoints**, as described at https://docs.oracle.com/en/cloud/paas/iot-cloud/iotrq/api-iot-application-integration.html. The Management Console offers a connectivity test feature to verify the connectivity to 
+Integrations are either interactively created in the Management Console UI (https://docs.oracle.com/en/cloud/paas/iot-cloud/iotgs/integrating-enterprise-applications-oracle-iot-cloud-service.html) or programmatically by using the **IoT Application Integrations REST Endpoint**, as described at https://docs.oracle.com/en/cloud/paas/iot-cloud/iotrq/api-iot-application-integration.html. The Management Console offers a connectivity test feature to verify the connectivity to 
 a Webhook server.
 
 A sample application that illustrates the use a Webhook can be provided on request.
