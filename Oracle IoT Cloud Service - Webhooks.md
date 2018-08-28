@@ -1,12 +1,30 @@
-# Oracle IoT Cloud service 
-##  Webhook mechanism for messages 
+# Oracle IoT Cloud service Event Model
+
+The Oracle IoT Cloud service provides an event model (messaging model) with two different message types:
+
+- regular messages
+- alerts
+
+Regular messages are sent by devices on status changes or at regular intervals, whereas alerts are sent to indicate an error condition that must be brought to the attention of a human. 
+The management console and server-side applications of the IoT Cloud Service distinugish between alerts and regular messages in the UI and provide alarming mechanisms.
+Devices must be registered at the IoT Cloud service (which involves the exchange of security information) before a device
+can send messages. The device is an active component and decides by itself when a message or an alert is sent.
+
+Messages are sent to the IoT Cloud Service via a REST API or by using Oracle's open source device client libraries, which are available for multiple platforms. Messages are sent as an array of JSON objects. A type field identifies the type of each message.
+
+The REST API endpoint for sending messages is described in more detail at https://docs.oracle.com/en/cloud/paas/iot-cloud/iotrq/op-iot-api-v2-messages-post.html
+
+A higher level of abstraction is provided by the client libraries (https://www.oracle.com/technetwork/indexes/downloads/iot-client-libraries-2705514.html)
+
+## Exposed devices 
 
 The Oracle IoT Cloud service provides a flexible integration mechanism for integrating with other off-the-shelf enterprise systems. Supported systems include Storage Cloud Service, Business Integration Cloud Service, Big Data Cloud Service, Mobile Cloud Service and others. 
 
 An overview of the various integratable cloud services can be seen at:
 https://docs.oracle.com/en/cloud/paas/iot-cloud/iotgs/integrating-external-services.html
 
-The IoT Cloud service also includes a generic mechanism for integrating other cloud services via the WebHook mechanism.
+The IoT Cloud service also includes a generic mechanism for integrating other cloud services via the WebHook mechanism,
+which will be used by WoT compliant devices.
 This mechanism establishes a client/server connection between the Oracle IoT Cloud Service (Client role) with a (HTTP) server in the target service.
 An application registeres a HTTP(s) callback and receives device messages via a  POST HTTP request, with the request payload containing the device message data in JSON format.
    
