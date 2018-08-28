@@ -50,7 +50,7 @@ The message formats, that are to be transmitted are selected when the integratio
 Integrations are either interactively created in the Management Console UI (https://docs.oracle.com/en/cloud/paas/iot-cloud/iotgs/integrating-enterprise-applications-oracle-iot-cloud-service.html) or programmatically by using the **IoT Application integrations REST Endpoints**, as described at https://docs.oracle.com/en/cloud/paas/iot-cloud/iotrq/api-iot-application-integration.html. The Management Console offers a connectivity test feature to verify the connectivity to 
 a Webhook server.
 
-A sample application that exposes a Webhook can be provided on request.
+A sample application that illustrates the use a Webhook can be provided on request.
 
 ### Payload examples 
 The payload format is plain JSON, as can be seen in the examples below. It contains message metadata, such as a message id, a client Id and a message source and timestamps and the actual payload format.
