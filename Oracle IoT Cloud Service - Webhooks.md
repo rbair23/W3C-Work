@@ -4,8 +4,8 @@ The Oracle IoT Cloud Service provides a robust and field-proven mechanism for se
 and gateways to the Cloud Service and vice versa. All communication is using JSON playloads over HTTP/REST.
 There are different mechanisms for consumed and exposed devices.
 
-An important design goal is to enable thousands of consumed devices to connect and send messages to the cloud service.
-To fulfill this requirement, *it is essential that client devices initiate the connection to the server*. 
+An important design goal was to enable thousands of consumed devices to connect and send messages to the cloud service.
+To fulfill this requirement, **it is essential that client devices initiate the connection to the server**. 
 It is impossible to have thousands of Websocket or Long-Poll connections open at the same time. 
 Furthermore this design does not have NAT problems, which cannot be easily solved on a Long-Poll or Websocket based approach. 
 
