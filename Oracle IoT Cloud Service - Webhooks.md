@@ -22,12 +22,12 @@ can send messages. The device is an **active component** and decides by itself w
 The registration mechanism implicitly performs a message subscription. 
 
 
-Messages are *sent* to the IoT Cloud Service via a REST API or by using Oracle's open source device client libraries, which are available for multiple platforms. Messages are sent as an array of JSON objects. A type field identifies the type of each message.
+Messages are **sent from the device to the cloud** to the IoT Cloud Service via a REST API or by using Oracle's open source device client libraries, which are available for multiple platforms. Messages are sent as an array of JSON objects. A type field identifies the type of each message.
 
 The message payload can contain a single event or can aggregate multiple messages. Multiple messages in a single payload
 are typically used when the connected device provides gateway functionality, i.e. when it aggregates messages from several connected devices.
 
-The same mechanism is also used to send messages **from the Cloud to the device**, where messages are passed in the
+The same mechanism is also used to send messages **from the cloud to the device**, where messages are passed in the
 response payload of a message. 
 
 The REST API endpoint for sending messages is described in more detail at https://docs.oracle.com/en/cloud/paas/iot-cloud/iotrq/op-iot-api-v2-messages-post.html
