@@ -6,8 +6,8 @@ There are different mechanisms for consumed and exposed devices.
 
 An important design goal was to enable thousands of consumed devices to connect and send messages to the cloud service.
 To fulfill this requirement, **it is essential that client devices initiate the connection to the server**. 
-It is impossible to have thousands of Websocket or Long-Poll connections open at the same time. 
-Furthermore this design does not have NAT problems, which cannot be easily solved on a Long-Poll or Websocket based approach. 
+It is very difficult to have thousands of Websocket or Long-Poll connections open at the same time with reasonable resource consumption in the server. 
+Furthermore this design does not have NAT problems, which require additional measures on a Long-Poll or Websocket based approach. 
 
 ## Consumed devices
 The Oracle IoT Cloud service provides an event model (messaging model) with two different message types:
