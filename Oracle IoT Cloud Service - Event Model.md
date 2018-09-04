@@ -1,6 +1,6 @@
 # Event Model of the Oracle IoT Cloud Service
 
-The Oracle IoT Cloud Service provides a robust and field-proven mechanism for sending messages from devices
+The Oracle IoT Cloud Service provides a robust and field-proven mechanism for sending messages from thousands of devices
 and gateways to the Cloud Service and vice versa. All communication is using JSON playloads over HTTP/REST.
 There are different mechanisms for consumed and exposed devices.
 
