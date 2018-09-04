@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The W3C WoT Thing Description (Latest Editors Draft: https://w3c.github.io/wot-thing-description) defines a very powerful format do describe myriads of very different devices, which may be connected over various protocols. 
+The W3C WoT Thing Description (Latest Editors Draft: https://w3c.github.io/wot-thing-description) defines a very powerful format to describe myriads of very different devices, which may be connected over various protocols. 
 The format is very flexible and open and puts very few normative requirements on  devices that implement it. This flexibility permits an easy integration of new device types and protocols, however it risks interoperability, since there are no guarantees, that two devices, which are formally spec-compliant, will be able to communicate.
 
 To increase the of adoption of the specification, interoperability between devices and the cloud is crucial. Even if every manufacturer is implementing the current spec in full flexibility, there is no interoperability guarantee: Many choices are left to the implementations and there are very few normative requirements, that a device has to fulfill.  
