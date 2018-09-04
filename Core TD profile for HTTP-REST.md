@@ -2,27 +2,26 @@
 
 ## Introduction
 
-The W3C WoT Thing Description (Latest Editors Draft: https://w3c.github.io/wot-thing-description) defines a very powerful format do describe myriads of very different devices, which may be connected over various protocols. 
-The format is very flexible and open and puts very few normative requirements on  devices that implement it. This flexibility permits an easy integration of new device types and protocols, however it risks interoperability, since there are no guarantees, that two devices, which are formally spec-compliant, will be able to communicate.
+The W3C WoT Thing Description (Latest Editors Draft: https://w3c.github.io/wot-thing-description) defines a very powerful format to describe myriads of very different devices, which may be connected over various protocols. 
+The format is very flexible and open and puts very few normative requirements on devices that implement it. This flexibility permits an easy integration of new device types and protocols, however it risks interoperability, since there are no guarantees that two devices which are formally spec-compliant, will be able to communicate.
 
-To increase the of adoption of the specification, interoperability between devices and the cloud is crucial. Even if every manufacturer is implementing the current spec in full flexibility, there is no interoperability guarantee: Many choices are left to the implementations and there are very few normative requirements, that a device has to fulfill.  
+To increase adoption of the specification, interoperability between devices and the cloud is crucial. Even if every manufacturer is implementing the current spec in full flexibility, there is no interoperability guarantee; many choices are left to the implementations and there are very few normative requirements that a device has to fulfill.  
 
 #### Why define a core TD profile?
-During the recent WoT plug-fests there were many de-facto agreements on the use of a small subset of interaction patterns and protocol choices. 
-These de-facto agreements select a common subset of the TD specification, based on proven interoperability among manufacturers.
+During the recent WoT plug-fests there were many de-facto agreements on the use of a small subset of interaction patterns and protocol choices. These de-facto agreements select a common subset of the TD specification, based on proven interoperability among manufacturers.
 
 The aim of this specification is to formalize these agreements by defining a **core TD profile** based on the choices that were made by the implementers of plug fest devices.
  
 The *core TD profile* contains additional normative requirements that MUST be satisfied by devices to be compliant to the profile. 
 
-Adoption of the *core TD profile*, will significantly limit the implementation burden to device and cloud implementors.
+Adoption of the *core TD profile* will significantly limit the implementation burden of device and cloud implementors.
 
-The *core TD profile* makes choices on the required metadata fields as well as the supported interactions and protocol endpoints. It introduces some constraints on properties and actions that are required for resource constrained devices in real-world deployments. The format does not prevent to use additional elements of the TD and permits vendor specific extensions, however this will impact interoperability.
+The *core TD profile* makes choices on the required metadata fields as well as the supported interactions and protocol endpoints. It introduces some constraints on properties and actions that are required for resource constrained devices in real-world deployments. The format does not prevent the use of additional elements of the TD and permits vendor specific extensions, however this will impact interoperability.
 
 #### Out-of-the-box interoperability
-Devices which implement the core profile are **out-of-the-box interoperable** with other HTTP/REST core compliant devices. Furthermore the core profile simplifies device validation and compliance testing, since a corresponding conformance test suite can be defined. 
+Devices which implement the core profile are **out-of-the-box interoperable** with other HTTP/REST core compliant devices. Furthermore, the core profile simplifies device validation and compliance testing since a corresponding conformance test suite can be defined. 
 
-> Note: It is also a goal of the *core TD profile* to ensure that compliant files can be understood by humans - therefore descriptions, dates and author fields are either mandatory or highly recommended.
+> Note: It is also a goal of the *core TD profile* to ensure that compliant files can be understood by humans - therefore descriptions, dates, and author fields are either mandatory or highly recommended.
 
 ## Terminology
 
@@ -38,27 +37,28 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 | Term | Definition |
 -------|--------------
 | core profile | The subset of the TD specification defined by the present document
-| Interface TD |  functional interface of things (a thing type)
+| Interface TD | Functional interface of things (a thing type)
 
 ## The WoT Core Profile
  
 
 ### Thing Types and Instances
-The **core profile** distinguishes between the **type** of a thing and a concrete **thing**. The type defines a functional **interface** to multiple things. A thing **instance** describes the concrete implementation on a device, e.g. metadata information such as manufacturer, model, location,  the supported protocol(s) and security meachanism(s).
+The **core profile** distinguishes between the **type** of a thing and a concrete **thing**. The type defines a functional **interface** to multiple things. A thing **instance** describes the concrete implementation on a device, e.g. metadata information such as manufacturer, model, location, the supported protocol(s) and security mechanism(s).
 
 This concept follows the object oriented paradigm of separating the interface from the implementation.
 
-#### Why separation of an interface and an instance?
+#### Why the separation of an interface and an instance?
 
-The *interface* of a thing can be understood as a template or bluperint, it is defined a common **Interface Thing Description** *(Interface TD)* of a thing, which declares a functional interface of devices **across different vendors**.
+The *interface* of a thing can be understood as a template or bluperint and is defined by a common **Interface Thing Description** *(Interface TD)* of a thing, which declares a functional interface of devices **across different vendors**.
 This mechanism can be used with plain JSON thing descriptions and fosters standardisation of common interfaces across different manufacturers. This increases the market size for common applications, which can be created and reused for devices/things from different vendors.
+
 The *interface* MAY include semantic annotations in JSON-LD to enable common type annotations, which allows enhanced use cases.
 
 The *instance* is a concrete thing, which has values for metadata fields and a protocol binding. In the *core profile* the protocol binding is *HTTP/REST with JSON payloads*.  
 
 > Note: The HTTP/REST with JSON protocol binding should be added as the **default binding** to the WoT TD specification, so it is not necessary to define it explicitly. 
 
-If an instance offers a binding to another protocol, the instance TD MUST indicate, whether this default HTTP/REST binding is also offered. 
+If an instance offers a binding to another protocol, the instance TD MUST indicate whether this default HTTP/REST binding is also offered. 
 
 The *core profile* also defines an **Instance Thing Description** *(instance TD)*, which contains concrete values for metadata fields (e.g. manufacturer, model number, location), protocol bindings and security information. 
 
@@ -89,7 +89,7 @@ userLastModified | uri_type |
 
 ##### Recommended practice:
 
-If a IF-TD is used within a company, the email address of the developer SHOULD be used in this field,
+If an IF-TD is used within a company, the email address of the developer SHOULD be used in this field,
 if the IF-TD is provided externally, a support email address conforming to the mailto scheme (https://tools.ietf.org/html/rfc6068) SHOULD be used.
 
 ### Properties
@@ -127,7 +127,7 @@ enum | array of anyType | too complex to implement on resource constrained devic
 
 #### Constraints against the TD specification
 
-The set of properties is limited to a one-level hierarchy, i.e. sub-properties MUST NOT be used.  Supported types are simple types, only boolean, string, number are permitted. Array and Object types MUST not be used. 
+The set of properties is limited to a one-level hierarchy, i.e. sub-properties MUST NOT be used. Supported types are simple types, only boolean, string, and number are permitted. Array and Object types MUST not be used. 
 
 > Note: This may appear as a severe limitiation, however it is motivated by integrating with multiple cloud services. Many enterprise services and applications are based on (relational) databases, where individual property values are stored. Of course databases can also store objects (e.g. encoded as a JSON string), however this will prevent processing by other enterprise applications.
 > 
@@ -237,7 +237,9 @@ If a location is provided, all three location MUST be present.
 ### Properties
 
 #### HTTP Protocol Binding
+
 The HTTP verbs GET and PUT are mapped on reading and writing a property - all other protocol verbs return an error "405 Method Not Allowed".
+
 > Note: Since HTTP does not provide a pub/sub mechanism, the observe interaction is not supported directly. The event mechanism can be used instead to send notifications on property changes.
 
 Multiple properties can be set/get by accessing the Properties endpoint.
@@ -248,7 +250,8 @@ Actions can be synchronous and asynchronous. The current TD specification does n
 Once these details are defined in the TD spec, the *core profile* will define an adequate subset and HTTP/REST mapping.
 
 #### HTTP Protocol Binding
-The HTTP verbs POST is mapped on invoking an action on the actions endpoint - all other protocol verbs return an error "405 Method Not Allowed".
+
+The HTTP verb POST is mapped to invoking an action on the actions endpoint - all other protocol verbs return an error "405 Method Not Allowed".
 
 ### Events
 
@@ -268,7 +271,7 @@ Since the relations of a link are currently undefined, the core specification do
 
 ### Security
 
-The core profile defines a subset of the security schemes that can be implemented on resource constrained devices. A security scheme MUST be defined at thing or interface level. It is applied to an interface as a whole or to the entire thing. 
+The core profile defines a subset of the security schemes that can be implemented on resource constrained devices. A security scheme MUST be defined at the thing or interface level. It is applied to an interface as a whole or to the entire thing. 
 
 The set of required security schemes will be determined after the online plug fest. 
 
