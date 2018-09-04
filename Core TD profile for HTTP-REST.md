@@ -1,5 +1,4 @@
-# W3C Web of Things: 
-# A WoT Core Profile for HTTP/REST
+# W3C Web of Things: A WoT Core Profile for HTTP/REST
 
 ## Introduction
 
@@ -103,6 +102,8 @@ The following property fields MUST be contained in an *Interface TD*:
 description | js_string   | human readable description
 type | js_string | one of "boolean", "string", "number", "integer". The type values "object", "array" or "null" SHOULD NOT be used. If they are present, they MUST be treated as strings.
 
+A property is represented as a JSON object with the key name.
+
 It is RECOMMENDED to include the following fields:
 
 key     |  type         | constraints 
@@ -132,8 +133,7 @@ The set of properties is limited to a one-level hierarchy, i.e. sub-properties M
 > 
 > If a property has a structure, such as a RGB color, the structure can be represented in the key of the property, i.e. color\_r, color\_g and color\_b.
 > A similar mapping can be done for arrays and hierarchical objects.
-> This constraint leads to simpler interface descriptions that can be handled by very limited devices.
-  
+> This constraint leads to simpler interface descriptions that can be handled by very limited devices.  
 
 ### Actions
 
@@ -144,6 +144,8 @@ The following fields MUST be contained in an action element of an *Interface TD*
  name     | js_identifier | unique name among all actions
  input    | array of DataSchema   | only the subclasses booleanSchema, IntegerSchema, NumberSchema, StringSchema are permitted
  output   | array of DataSchema   | only the subclasses booleanSchema, IntegerSchema, NumberSchema, StringSchema are permitted
+
+An action is represented as a JSON object with the key name.
 
 The DataSchema subclasses ArraySchema and ObjectSchema MUST NOT be used in an Interface TD conforming to the core profile. They put a higher implementation burden on resource constrained devices (arbitrary cascaded arrays and multi-level objects) which cannot be satisifed by all devices.
  
@@ -194,11 +196,12 @@ href	| uri_type | URI of the endpoint
 
 An **Instance Thing Description** has the following structure:
   
-Instance Thing Description   | 
-----------
-metadata fields of the thing |
-array of thing interfaces with corresponding protocol bindings | 
+ | Instance Thing Description   | 
+ | ---------------------------- |
+ | metadata fields of the thing |
+ | array of thing interfaces with corresponding protocol bindings | 
 
+Protocol bindings are specified with the *Form* 
 
 ### Metadata fields
 To provide minimum interoperability the following metadata fields MUST be contained in an *Instance TD*:
@@ -215,7 +218,6 @@ deviceCreated | js_date  |
 deviceLastModified | js_date  | 
 deviceUserLastModified | js_string | 
 security | array of SecurityScheme
-
 
 It is RECOMMENDED to use the value "Unknown" for strings, where the value cannot be determined. For unknown dates, use of the value "xxx" is RECOMMENDED.
 
@@ -248,7 +250,6 @@ Once these details are defined in the TD spec, the *core profile* will define an
 #### HTTP Protocol Binding
 The HTTP verbs POST is mapped on invoking an action on the actions endpoint - all other protocol verbs return an error "405 Method Not Allowed".
 
-
 ### Events
 
 Events are currently under discussion and not yet fully specified. 
@@ -280,12 +281,10 @@ Candidates include:
 - PSK
 - Oauth2
 
-
 ## External TD representations
 
-#### JSON Representation
-
-#### JSON-LD Representation
+The default representation is JSON. 
+Semantic annotations based on JSON-LD MAY be present but are not required to perform all interactions with the thing instance.
 
 ## Normative references
 
